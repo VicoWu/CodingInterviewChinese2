@@ -1,20 +1,19 @@
 /*******************************************************************
 Copyright(c) 2016, Harry He
 All rights reserved.
-
 Distributed under the BSD license.
 (See accompanying file LICENSE.txt at
 https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 *******************************************************************/
 
 //==================================================================
-// ¡¶½£Ö¸Offer¡ª¡ªÃûÆóÃæÊÔ¹Ù¾«½²µäĞÍ±à³ÌÌâ¡·´úÂë
-// ×÷Õß£ººÎº£ÌÎ
+// ã€Šå‰‘æŒ‡Offerâ€”â€”åä¼é¢è¯•å®˜ç²¾è®²å…¸å‹ç¼–ç¨‹é¢˜ã€‹ä»£ç 
+// ä½œè€…ï¼šä½•æµ·æ¶›
 //==================================================================
 
-// ÃæÊÔÌâ8£º¶ş²æÊ÷µÄÏÂÒ»¸ö½áµã
-// ÌâÄ¿£º¸ø¶¨Ò»¿Ã¶ş²æÊ÷ºÍÆäÖĞµÄÒ»¸ö½áµã£¬ÈçºÎÕÒ³öÖĞĞò±éÀúË³ĞòµÄÏÂÒ»¸ö½áµã£¿
-// Ê÷ÖĞµÄ½áµã³ıÁËÓĞÁ½¸ö·Ö±ğÖ¸Ïò×óÓÒ×Ó½áµãµÄÖ¸ÕëÒÔÍâ£¬»¹ÓĞÒ»¸öÖ¸Ïò¸¸½áµãµÄÖ¸Õë¡£
+// é¢è¯•é¢˜8ï¼šäºŒå‰æ ‘çš„ä¸‹ä¸€ä¸ªç»“ç‚¹
+// é¢˜ç›®ï¼šç»™å®šä¸€æ£µäºŒå‰æ ‘å’Œå…¶ä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå¦‚ä½•æ‰¾å‡ºä¸­åºéå†é¡ºåºçš„ä¸‹ä¸€ä¸ªç»“ç‚¹ï¼Ÿ
+// æ ‘ä¸­çš„ç»“ç‚¹é™¤äº†æœ‰ä¸¤ä¸ªåˆ†åˆ«æŒ‡å‘å·¦å³å­ç»“ç‚¹çš„æŒ‡é’ˆä»¥å¤–ï¼Œè¿˜æœ‰ä¸€ä¸ªæŒ‡å‘çˆ¶ç»“ç‚¹çš„æŒ‡é’ˆã€‚
 
 #include <stdio.h>
 
@@ -32,31 +31,31 @@ BinaryTreeNode* GetNext(BinaryTreeNode* pNode)
         return nullptr;
 
     BinaryTreeNode* pNext = nullptr;
-    if(pNode->m_pRight != nullptr)
+    if(pNode->m_pRight != nullptr) // å¦‚æœè¿™ä¸ªèŠ‚ç‚¹æœ‰å³å­æ ‘ï¼Œé‚£ä¹ˆä¸€ç›´æ‰¾åˆ°å³å­æ ‘çš„æœ€å·¦ä¾§èŠ‚ç‚¹
     {
         BinaryTreeNode* pRight = pNode->m_pRight;
         while(pRight->m_pLeft != nullptr)
-            pRight = pRight->m_pLeft;
+            pRight = pRight->m_pLeft;//ä¸€ç›´æ‰¾åˆ°æœ€å·¦ä¾§èŠ‚ç‚¹
 
         pNext = pRight;
     }
-    else if(pNode->m_pParent != nullptr)
+    else if(pNode->m_pParent != nullptr) //è¿™ä¸ªèŠ‚ç‚¹æ²¡æœ‰å³å­æ ‘
     {
         BinaryTreeNode* pCurrent = pNode;
         BinaryTreeNode* pParent = pNode->m_pParent;
-        while(pParent != nullptr && pCurrent == pParent->m_pRight)
+        while(pParent != nullptr && pCurrent == pParent->m_pRight) // åªè¦å½“å‰èŠ‚ç‚¹æ˜¯çˆ¶äº²èŠ‚ç‚¹çš„å³èŠ‚ç‚¹ï¼Œå°±éœ€è¦ä¸€ç›´å¾€ä¸ŠæŸ¥æ‰¾
         {
             pCurrent = pParent;
             pParent = pParent->m_pParent;
         }
-
+        //é€€å‡ºå¾ªç¯ï¼Œè¯´æ˜çˆ¶äº²èŠ‚ç‚¹æ˜¯ç©ºèŠ‚ç‚¹ï¼Œæˆ–è€…å½“å‰èŠ‚ç‚¹æ˜¯çˆ¶äº²èŠ‚ç‚¹çš„åå­æ ‘
         pNext = pParent;
     }
 
     return pNext;
 }
 
-// ==================== ¸¨Öú´úÂëÓÃÀ´¹¹½¨¶ş²æÊ÷ ====================
+// ==================== è¾…åŠ©ä»£ç ç”¨æ¥æ„å»ºäºŒå‰æ ‘ ====================
 BinaryTreeNode* CreateBinaryTreeNode(int value)
 {
     BinaryTreeNode* pNode = new BinaryTreeNode();
@@ -135,7 +134,7 @@ void DestroyTree(BinaryTreeNode* pRoot)
     }
 }
 
-// ====================²âÊÔ´úÂë====================
+// ====================æµ‹è¯•ä»£ç ====================
 void Test(char* testName, BinaryTreeNode* pNode, BinaryTreeNode* expected)
 {
     if(testName != nullptr)

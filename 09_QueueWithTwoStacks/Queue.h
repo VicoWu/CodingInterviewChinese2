@@ -1,20 +1,19 @@
 /*******************************************************************
 Copyright(c) 2016, Harry He
 All rights reserved.
-
 Distributed under the BSD license.
 (See accompanying file LICENSE.txt at
 https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 *******************************************************************/
 
 //==================================================================
-// ¡¶½£Ö¸Offer¡ª¡ªÃûÆóÃæÊÔ¹Ù¾«½²µäĞÍ±à³ÌÌâ¡·´úÂë
-// ×÷Õß£ººÎº£ÌÎ
+// ã€Šå‰‘æŒ‡Offerâ€”â€”åä¼é¢è¯•å®˜ç²¾è®²å…¸å‹ç¼–ç¨‹é¢˜ã€‹ä»£ç 
+// ä½œè€…ï¼šä½•æµ·æ¶›
 //==================================================================
 
-// ÃæÊÔÌâ9£ºÓÃÁ½¸öÕ»ÊµÏÖ¶ÓÁĞ
-// ÌâÄ¿£ºÓÃÁ½¸öÕ»ÊµÏÖÒ»¸ö¶ÓÁĞ¡£¶ÓÁĞµÄÉùÃ÷ÈçÏÂ£¬ÇëÊµÏÖËüµÄÁ½¸öº¯ÊıappendTail
-// ºÍdeleteHead£¬·Ö±ğÍê³ÉÔÚ¶ÓÁĞÎ²²¿²åÈë½áµãºÍÔÚ¶ÓÁĞÍ·²¿É¾³ı½áµãµÄ¹¦ÄÜ¡£
+// é¢è¯•é¢˜9ï¼šç”¨ä¸¤ä¸ªæ ˆå®ç°é˜Ÿåˆ—
+// é¢˜ç›®ï¼šç”¨ä¸¤ä¸ªæ ˆå®ç°ä¸€ä¸ªé˜Ÿåˆ—ã€‚é˜Ÿåˆ—çš„å£°æ˜å¦‚ä¸‹ï¼Œè¯·å®ç°å®ƒçš„ä¸¤ä¸ªå‡½æ•°appendTail
+// å’ŒdeleteHeadï¼Œåˆ†åˆ«å®Œæˆåœ¨é˜Ÿåˆ—å°¾éƒ¨æ’å…¥ç»“ç‚¹å’Œåœ¨é˜Ÿåˆ—å¤´éƒ¨åˆ é™¤ç»“ç‚¹çš„åŠŸèƒ½ã€‚
 
 #pragma once
 #include <stack>
@@ -27,11 +26,11 @@ template <typename T> class CQueue
 public:
     CQueue(void);
     ~CQueue(void);
-    
-    // ÔÚ¶ÓÁĞÄ©Î²Ìí¼ÓÒ»¸ö½áµã
+
+    // åœ¨é˜Ÿåˆ—æœ«å°¾æ·»åŠ ä¸€ä¸ªç»“ç‚¹
     void appendTail(const T& node);
 
-    // É¾³ı¶ÓÁĞµÄÍ·½áµã
+    // åˆ é™¤é˜Ÿåˆ—çš„å¤´ç»“ç‚¹
     T deleteHead();
 
 private:
@@ -49,12 +48,12 @@ template <typename T> CQueue<T>::~CQueue(void)
 
 template<typename T> void CQueue<T>::appendTail(const T& element)
 {
-    stack1.push(element);
-} 
+    stack1.push(element); // æ’å…¥çš„æ—¶å€™ï¼Œåªéœ€è¦æ’å…¥åˆ°ç¬¬ä¸€ä¸ªæ ˆ
+}
 
 template<typename T> T CQueue<T>::deleteHead()
 {
-    if(stack2.size()<= 0)
+    if(stack2.size()<= 0) //åˆ é™¤çš„æ—¶å€™ï¼Œéœ€è¦åˆ¤æ–­ç¬¬äºŒä¸ªæ ˆæ˜¯å¦ä¸ºç©ºï¼Œå¦‚æœä¸ºç©ºï¼Œå°±æŠŠç¬¬ä¸€ä¸ªæ ˆä¸­æ‰€æœ‰çš„å…ƒç´ å‡ºæ ˆï¼Œå…¨éƒ¨å‹å…¥ç¬¬äºŒä¸ªæ ˆï¼Œç„¶å
     {
         while(stack1.size()>0)
         {
@@ -64,10 +63,10 @@ template<typename T> T CQueue<T>::deleteHead()
         }
     }
 
-    if(stack2.size() == 0)
+    if(stack2.size() == 0)//ä¸¤ä¸ªæ ˆéƒ½æ²¡æœ‰å…ƒç´ äº†ï¼ŒæŠ›å‡ºå¼‚å¸¸
         throw new exception("queue is empty");
 
-    T head = stack2.top();
+    T head = stack2.top();//ä»ç¬¬äºŒä¸ªæ ˆä¸­å‡ºæ ˆä¸€ä¸ªå…ƒç´ 
     stack2.pop();
 
     return head;

@@ -1,24 +1,23 @@
 /*******************************************************************
 Copyright(c) 2016, Harry He
 All rights reserved.
-
 Distributed under the BSD license.
 (See accompanying file LICENSE.txt at
 https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 *******************************************************************/
 
 //==================================================================
-// ����ָOffer�����������Թپ������ͱ���⡷����
-// ���ߣ��κ���
+// 《剑指Offer——名企面试官精讲典型编程题》代码
+// 作者：何海涛
 //==================================================================
 
-// ������12�������е�·��
-// ��Ŀ�������һ�������������ж���һ���������Ƿ����һ������ĳ�ַ�������
-// �ַ���·����·�����ԴӾ���������һ��ʼ��ÿһ�������ھ����������ҡ�
-// �ϡ����ƶ�һ�����һ��·�������˾����ĳһ����ô��·�������ٴν���
-// �ø��ӡ������������3��4�ľ����а���һ���ַ�����bfce����·����·���е���
-// ĸ���»��߱�������������в������ַ�����abfb����·������Ϊ�ַ����ĵ�һ��
-// �ַ�bռ���˾����еĵ�һ�еڶ�������֮��·�������ٴν���������ӡ�
+// 面试题12：矩阵中的路径
+// 题目：请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有
+// 字符的路径。路径可以从矩阵中任意一格开始，每一步可以在矩阵中向左、右、
+// 上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入
+// 该格子。例如在下面的3×4的矩阵中包含一条字符串“bfce”的路径（路径中的字
+// 母用下划线标出）。但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个
+// 字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。
 // A B T G
 // C F C S
 // J D E H
@@ -44,6 +43,7 @@ bool hasPath(const char* matrix, int rows, int cols, const char* str)
     {
         for(int col = 0; col < cols; ++col)
         {
+        // 尝试从每一个位置开始
             if(hasPathCore(matrix, rows, cols, row, col, str,
                 pathLength, visited))
             {
@@ -64,33 +64,34 @@ bool hasPathCore(const char* matrix, int rows, int cols, int row,
         return true;
 
     bool hasPath = false;
-    if(row >= 0 && row < rows && col >= 0 && col < cols
-        && matrix[row * cols + col] == str[pathLength]
-        && !visited[row * cols + col])
+
+    if(row >= 0 && row < rows && col >= 0 && col < cols //边界检查
+        && matrix[row * cols + col] == str[pathLength] // 匹配
+        && !visited[row * cols + col]) //没有被访问过
     {
         ++pathLength;
         visited[row * cols + col] = true;
 
-        hasPath = hasPathCore(matrix, rows, cols, row, col - 1,
+        hasPath = hasPathCore(matrix, rows, cols, row, col - 1, //左侧节点
             str, pathLength, visited)
-            || hasPathCore(matrix, rows, cols, row - 1, col,
+            || hasPathCore(matrix, rows, cols, row - 1, col, //上侧节点
                 str, pathLength, visited)
-            || hasPathCore(matrix, rows, cols, row, col + 1,
+            || hasPathCore(matrix, rows, cols, row, col + 1, // 右侧节点
                 str, pathLength, visited)
-            || hasPathCore(matrix, rows, cols, row + 1, col,
+            || hasPathCore(matrix, rows, cols, row + 1, col, // 下册节点
                 str, pathLength, visited);
 
-        if(!hasPath)
+        if(!hasPath)//上下左右都没有解决方案
         {
-            --pathLength;
-            visited[row * cols + col] = false;
+            --pathLength; //回退
+            visited[row * cols + col] = false; //回退
         }
     }
 
     return hasPath;
 }
 
-// ====================���Դ���====================
+// ====================测试代码====================
 void Test(const char* testName, const char* matrix, int rows, int cols, const char* str, bool expected)
 {
     if(testName != nullptr)
