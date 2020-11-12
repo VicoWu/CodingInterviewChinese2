@@ -1,19 +1,18 @@
 /*******************************************************************
 Copyright(c) 2016, Harry He
 All rights reserved.
-
 Distributed under the BSD license.
 (See accompanying file LICENSE.txt at
 https://github.com/zhedahht/CodingInterviewChinese2/blob/master/LICENSE.txt)
 *******************************************************************/
 
 //==================================================================
-// ¡¶½£Ö¸Offer¡ª¡ªÃûÆóÃæÊÔ¹Ù¾«½²µäĞÍ±à³ÌÌâ¡·´úÂë
-// ×÷Õß£ººÎº£ÌÎ
+// ã€Šå‰‘æŒ‡Offerâ€”â€”åä¼é¢è¯•å®˜ç²¾è®²å…¸å‹ç¼–ç¨‹é¢˜ã€‹ä»£ç 
+// ä½œè€…ï¼šä½•æµ·æ¶›
 //==================================================================
 
-// ÃæÊÔÌâ26£ºÊ÷µÄ×Ó½á¹¹
-// ÌâÄ¿£ºÊäÈëÁ½¿Ã¶ş²æÊ÷AºÍB£¬ÅĞ¶ÏBÊÇ²»ÊÇAµÄ×Ó½á¹¹¡£
+// é¢è¯•é¢˜26ï¼šæ ‘çš„å­ç»“æ„
+// é¢˜ç›®ï¼šè¾“å…¥ä¸¤æ£µäºŒå‰æ ‘Aå’ŒBï¼Œåˆ¤æ–­Bæ˜¯ä¸æ˜¯Açš„å­ç»“æ„ã€‚
 
 #include <cstdio>
 
@@ -33,9 +32,9 @@ bool HasSubtree(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
 
     if(pRoot1 != nullptr && pRoot2 != nullptr)
     {
-        if(Equal(pRoot1->m_dbValue, pRoot2->m_dbValue))
+        if(Equal(pRoot1->m_dbValue, pRoot2->m_dbValue)) //æ ¹èŠ‚ç‚¹ç›¸åŒï¼Œ å¼€å§‹åˆ¤æ–­æ˜¯å¦p2æ˜¯p1çš„å­æ ‘
             result = DoesTree1HaveTree2(pRoot1, pRoot2);
-        if(!result)
+        if(!result) //æ ¹èŠ‚ç‚¹ä¸åŒï¼Œå¼€å§‹é€’å½’å¾€p1çš„å­æ ‘ä¸ŠæŸ¥æ‰¾
             result = HasSubtree(pRoot1->m_pLeft, pRoot2);
         if(!result)
             result = HasSubtree(pRoot1->m_pRight, pRoot2);
@@ -44,19 +43,20 @@ bool HasSubtree(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
     return result;
 }
 
+// è¿™ä¸ªæ–¹æ³•æ˜¯å·²ç»çŸ¥é“pRoot1å’ŒpRoot2çš„å€¼ç›¸åŒï¼Œç„¶åé€’å½’ç¡®è®¤å­èŠ‚ç‚¹æ˜¯å¦ç›¸åŒ
 bool DoesTree1HaveTree2(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)
 {
-    if(pRoot2 == nullptr)
+    if(pRoot2 == nullptr) //å³ä¾§æ ‘å·²ç»åˆ°è¾¾ç©ºèŠ‚ç‚¹äº†ï¼Œè¿”å›true
         return true;
 
-    if(pRoot1 == nullptr)
+    if(pRoot1 == nullptr) // å³ä¾§å­æ ‘ä¸ä¸ºç©ºï¼Œä½†æ˜¯å·¦ä¾§å·²ç»ä¸ºç©ºäº†ï¼Œè¯´æ˜ä¸æ˜¯å­æ ‘
         return false;
 
     if(!Equal(pRoot1->m_dbValue, pRoot2->m_dbValue))
         return false;
 
-    return DoesTree1HaveTree2(pRoot1->m_pLeft, pRoot2->m_pLeft) &&
-        DoesTree1HaveTree2(pRoot1->m_pRight, pRoot2->m_pRight);
+    return DoesTree1HaveTree2(pRoot1->m_pLeft, pRoot2->m_pLeft) && // å·¦ä¾§å®Œå…¨ç›¸åŒå¹¶ä¸”å³ä¾§å®Œå…¨ç›¸åŒ
+           DoesTree1HaveTree2(pRoot1->m_pRight, pRoot2->m_pRight);
 }
 
 bool Equal(double num1, double num2)
@@ -67,7 +67,7 @@ bool Equal(double num1, double num2)
         return false;
 }
 
-// ====================¸¨Öú²âÊÔ´úÂë====================
+// ====================è¾…åŠ©æµ‹è¯•ä»£ç ====================
 BinaryTreeNode* CreateBinaryTreeNode(double dbValue)
 {
     BinaryTreeNode* pNode = new BinaryTreeNode();
@@ -102,7 +102,7 @@ void DestroyTree(BinaryTreeNode* pRoot)
     }
 }
 
-// ====================²âÊÔ´úÂë====================
+// ====================æµ‹è¯•ä»£ç ====================
 void Test(char* testName, BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2, bool expected)
 {
     if(HasSubtree(pRoot1, pRoot2) == expected)
@@ -111,7 +111,7 @@ void Test(char* testName, BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2, bool e
         printf("%s failed.\n", testName);
 }
 
-// Ê÷ÖĞ½áµãº¬ÓĞ·Ö²æ£¬Ê÷BÊÇÊ÷AµÄ×Ó½á¹¹
+// æ ‘ä¸­ç»“ç‚¹å«æœ‰åˆ†å‰ï¼Œæ ‘Bæ˜¯æ ‘Açš„å­ç»“æ„
 //                  8                8
 //              /       \           / \
 //             8         7         9   2
@@ -145,7 +145,7 @@ void Test1()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷ÖĞ½áµãº¬ÓĞ·Ö²æ£¬Ê÷B²»ÊÇÊ÷AµÄ×Ó½á¹¹
+// æ ‘ä¸­ç»“ç‚¹å«æœ‰åˆ†å‰ï¼Œæ ‘Bä¸æ˜¯æ ‘Açš„å­ç»“æ„
 //                  8                8
 //              /       \           / \
 //             8         7         9   2
@@ -179,14 +179,14 @@ void Test2()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷ÖĞ½áµãÖ»ÓĞ×ó×Ó½áµã£¬Ê÷BÊÇÊ÷AµÄ×Ó½á¹¹
+// æ ‘ä¸­ç»“ç‚¹åªæœ‰å·¦å­ç»“ç‚¹ï¼Œæ ‘Bæ˜¯æ ‘Açš„å­ç»“æ„
 //                8                  8
-//              /                   / 
-//             8                   9   
+//              /                   /
+//             8                   9
 //           /                    /
 //          9                    2
-//         /      
-//        2        
+//         /
+//        2
 //       /
 //      5
 void Test3()
@@ -215,14 +215,14 @@ void Test3()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷ÖĞ½áµãÖ»ÓĞ×ó×Ó½áµã£¬Ê÷B²»ÊÇÊ÷AµÄ×Ó½á¹¹
+// æ ‘ä¸­ç»“ç‚¹åªæœ‰å·¦å­ç»“ç‚¹ï¼Œæ ‘Bä¸æ˜¯æ ‘Açš„å­ç»“æ„
 //                8                  8
-//              /                   / 
-//             8                   9   
+//              /                   /
+//             8                   9
 //           /                    /
 //          9                    3
-//         /      
-//        2        
+//         /
+//        2
 //       /
 //      5
 void Test4()
@@ -251,14 +251,14 @@ void Test4()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷ÖĞ½áµãÖ»ÓĞÓÒ×Ó½áµã£¬Ê÷BÊÇÊ÷AµÄ×Ó½á¹¹
+// æ ‘ä¸­ç»“ç‚¹åªæœ‰å³å­ç»“ç‚¹ï¼Œæ ‘Bæ˜¯æ ‘Açš„å­ç»“æ„
 //       8                   8
-//        \                   \ 
-//         8                   9   
+//        \                   \
+//         8                   9
 //          \                   \
 //           9                   2
-//            \      
-//             2        
+//            \
+//             2
 //              \
 //               5
 void Test5()
@@ -287,14 +287,14 @@ void Test5()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷AÖĞ½áµãÖ»ÓĞÓÒ×Ó½áµã£¬Ê÷B²»ÊÇÊ÷AµÄ×Ó½á¹¹
+// æ ‘Aä¸­ç»“ç‚¹åªæœ‰å³å­ç»“ç‚¹ï¼Œæ ‘Bä¸æ˜¯æ ‘Açš„å­ç»“æ„
 //       8                   8
-//        \                   \ 
-//         8                   9   
+//        \                   \
+//         8                   9
 //          \                 / \
 //           9               3   2
-//            \      
-//             2        
+//            \
+//             2
 //              \
 //               5
 void Test6()
@@ -324,7 +324,7 @@ void Test6()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷AÎª¿ÕÊ÷
+// æ ‘Aä¸ºç©ºæ ‘
 void Test7()
 {
     BinaryTreeNode* pNodeB1 = CreateBinaryTreeNode(8);
@@ -340,7 +340,7 @@ void Test7()
     DestroyTree(pNodeB1);
 }
 
-// Ê÷BÎª¿ÕÊ÷
+// æ ‘Bä¸ºç©ºæ ‘
 void Test8()
 {
     BinaryTreeNode* pNodeA1 = CreateBinaryTreeNode(8);
@@ -356,7 +356,7 @@ void Test8()
     DestroyTree(pNodeA1);
 }
 
-// Ê÷AºÍÊ÷B¶¼Îª¿Õ
+// æ ‘Aå’Œæ ‘Béƒ½ä¸ºç©º
 void Test9()
 {
     Test("Test9", nullptr, nullptr, false);
@@ -376,4 +376,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-

@@ -52,11 +52,11 @@ bool Increment(char* number)
     {
         int nSum = number[i] - '0' + nTakeOver;
         if (i == nLength - 1)
-            nSum++;
+            nSum++; //末尾的一位，需要加1
 
-        if (nSum >= 10)
+        if (nSum >= 10) //需要进位
         {
-            if (i == 0)
+            if (i == 0) //已经到最高位了
                 isOverflow = true;
             else
             {
@@ -72,10 +72,11 @@ bool Increment(char* number)
         }
     }
 
-    return isOverflow;
+    return isOverflow; //overflow代表已经到了比如1000了
 }
 
 // ====================方法二====================
+// 全排列
 void Print1ToMaxOfNDigits_2(int n)
 {
     if (n <= 0)
@@ -101,7 +102,7 @@ void Print1ToMaxOfNDigitsRecursively(char* number, int length, int index)
         return;
     }
 
-    for (int i = 0; i < 10; ++i)
+    for (int i = 0; i < 10; ++i) //尝试在index的位置上放入从0到9
     {
         number[index + 1] = i + '0';
         Print1ToMaxOfNDigitsRecursively(number, length, index + 1);
